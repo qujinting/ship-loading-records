@@ -17,26 +17,10 @@ body {
 .page {
   max-width: 480px;
   margin: 0 auto;
-  padding: 0 12px 90px;
+  padding: 0 12px;
+  padding-bottom: calc(16px + 8px + 46px + 8px + env(safe-area-inset-bottom));
   padding-left: max(12px, env(safe-area-inset-left));
   padding-right: max(12px, env(safe-area-inset-right));
-}
-
-.page__hd {
-  padding: 16px 0 12px;
-  text-align: center;
-}
-
-.page__title {
-  font-size: 22px;
-  font-weight: 600;
-  color: #333;
-}
-
-.page__desc {
-  font-size: 13px;
-  color: #999;
-  margin-top: 4px;
 }
 
 .section-title {
@@ -219,11 +203,14 @@ body {
   right: 0;
   z-index: 100;
   padding: 8px 12px;
-  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  padding-bottom: calc(8px + env(safe-area-inset-bottom));
   padding-left: max(12px, env(safe-area-inset-left));
   padding-right: max(12px, env(safe-area-inset-right));
   background: #fff;
   box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.06);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
 }
 
 .footer-actions {
@@ -404,7 +391,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 300px;
-  max-height: 70vh;
+  max-height: calc(70vh - env(safe-area-inset-bottom));
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
