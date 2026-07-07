@@ -1,0 +1,495 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #f5f5f5;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 12px 90px;
+  padding-left: max(12px, env(safe-area-inset-left));
+  padding-right: max(12px, env(safe-area-inset-right));
+}
+
+.page__hd {
+  padding: 16px 0 12px;
+  text-align: center;
+}
+
+.page__title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+.page__desc {
+  font-size: 13px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.section-title .count {
+  color: #999;
+  font-size: 12px;
+}
+
+/* ========== 表单面板（label 置顶） ========== */
+.form-panel {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px 14px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group__label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* ========== Radio Chip 单选按钮组 ========== */
+.radio-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.radio-chip {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 48px;
+}
+
+.radio-chip input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-chip__label {
+  display: block;
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  background: #f7f7f7;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.15s ease;
+}
+
+.radio-chip__label:active {
+  transform: scale(0.96);
+}
+
+.radio-chip input[type="radio"]:checked+.radio-chip__label {
+  color: #fff;
+  background: #1677ff;
+  border-color: #1677ff;
+  font-weight: 500;
+}
+
+.radio-chip-empty {
+  font-size: 13px;
+  color: #bbb;
+  padding: 4px 0;
+}
+
+/* ========== 箱号输入 ========== */
+.container-item {
+  margin-bottom: 8px;
+}
+
+.container-item:last-child {
+  margin-bottom: 0;
+}
+
+.container-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.container-row .weui-input {
+  flex: 1;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #fafafa;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.container-row .weui-input:focus {
+  border-color: #1677ff;
+  background: #fff;
+}
+
+.container-row .btn-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid #1677ff;
+  background: #fff;
+  font-size: 20px;
+  line-height: 33px;
+  text-align: center;
+  color: #1677ff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.container-row .btn-icon:active {
+  background: #1677ff;
+  color: #fff;
+}
+
+.container-row .btn-remove-container {
+  border-color: #ff4d4f;
+  color: #ff4d4f;
+}
+
+.container-row .btn-remove-container:active {
+  background: #ff4d4f;
+  color: #fff;
+}
+
+.btn-area {
+  padding: 16px 0 0;
+}
+
+/* ========== 按钮高度统一 ========== */
+.weui-btn {
+  height: 46px;
+  line-height: 46px;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 16px;
+}
+
+.btn-area .weui-btn {
+  white-space: nowrap;
+}
+
+/* ========== 底部操作（fixed 悬浮） ========== */
+.page__footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 8px 12px;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  padding-left: max(12px, env(safe-area-inset-left));
+  padding-right: max(12px, env(safe-area-inset-right));
+  background: #fff;
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.footer-actions {
+  display: flex;
+  gap: 10px;
+  max-width: 456px;
+  margin: 0 auto;
+}
+
+.footer-actions .weui-btn {
+  flex: 1;
+  margin-top: 0 !important;
+  white-space: nowrap;
+}
+
+/* ========== 记录列表样式 ========== */
+.record-list {
+  padding: 0;
+}
+
+.record-card {
+  background: #fff;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.record-card__body {
+  padding: 14px 15px;
+  position: relative;
+}
+
+.record-card__row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.record-card__row--tags {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.record-card__row:last-child {
+  margin-bottom: 0;
+}
+
+.record-card__label {
+  color: #999;
+  flex-shrink: 0;
+  margin-right: 8px;
+  font-size: 13px;
+}
+
+.record-card__value {
+  color: #333;
+  word-break: break-all;
+}
+
+.record-card__tag {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-right: 4px;
+  background: #e8f4ff;
+  color: #1677ff;
+}
+
+.record-card__time {
+  font-size: 11px;
+  color: #bbb;
+  margin-top: 4px;
+}
+
+.record-card__del {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 12px;
+  color: #ff4d4f;
+  cursor: pointer;
+  padding: 4px 8px;
+  border: 1px solid #ff4d4f;
+  border-radius: 4px;
+  background: #fff;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ========== 展开更多按钮 ========== */
+.list-expand {
+  text-align: center;
+  padding: 12px 0 16px;
+}
+
+.list-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 28px;
+  font-size: 15px;
+  color: #1677ff;
+  background: #fff;
+  border: 1px solid #1677ff;
+  border-radius: 20px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.list-expand-btn:active {
+  background: #e6f0ff;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #ccc;
+}
+
+.empty-state__icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.empty-state__text {
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* ========== 表单校验错误态 ========== */
+.form-group--error .form-group__label {
+  color: #ff4d4f;
+}
+
+.form-group--error .radio-chip-group {
+  padding: 6px;
+  border: 1.5px dashed #ff4d4f;
+  border-radius: 8px;
+  background: #fff2f0;
+}
+
+.form-group--error .radio-chip-empty {
+  color: #ff4d4f;
+}
+
+.container-row--error .container-input {
+  border-color: #ff4d4f !important;
+  background: #fff2f0 !important;
+}
+
+/* ========== 导出日期弹窗 ========== */
+#exportDateModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+}
+
+#exportDateModal .weui-mask {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.export-date-dialog {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  max-height: 70vh;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.export-date-dialog__hd {
+  padding: 16px 20px 8px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.export-date-dialog__bd {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 0;
+}
+
+.export-date-dialog__ft {
+  display: flex;
+  gap: 10px;
+  padding: 0 20px 20px;
+}
+
+.export-date-dialog__ft .weui-btn {
+  flex: 1;
+  margin-top: 0 !important;
+}
+
+.export-date-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.export-date-item:active {
+  background: #f5f5f5;
+}
+
+.export-date-item__label {
+  font-size: 15px;
+  color: #333;
+}
+
+.export-date-item__count {
+  font-size: 13px;
+  color: #999;
+}
+
+.export-date-item__check {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border: 2px solid #d0d0d0;
+  border-radius: 50%;
+  transition: all 0.15s ease;
+}
+
+.export-date-item--checked .export-date-item__check {
+  position: relative;
+  background: #1677ff;
+  border-color: #1677ff;
+}
+
+.export-date-item--checked .export-date-item__check::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 6px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Toast 覆盖 */
+.weui-toast {
+  z-index: 9999;
+}

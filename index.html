@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>船舶配载记录</title>
+    <!-- WeUI 移动端样式 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/weui@2.6.16/dist/style/weui.min.css" />
+    <!-- 自定义样式 -->
+    <link
+      rel="stylesheet"
+      href="style.css" />
+  </head>
+  <body>
+    <div
+      class="page"
+      id="app">
+      <!-- 标题 -->
+      <div class="page__hd">
+        <div class="page__title">🚢 船舶配载记录</div>
+        <div class="page__desc">记录每次拖车装载的托盘信息</div>
+      </div>
+
+      <!-- 表单区域 -->
+      <div class="section-title">录入新记录</div>
+      <div class="form-panel">
+        <!-- 甲板号 -->
+        <div class="form-group">
+          <label class="form-group__label">甲板号</label>
+          <div
+            class="radio-chip-group"
+            id="deckGroup"></div>
+        </div>
+
+        <!-- 车道号 -->
+        <div class="form-group">
+          <label class="form-group__label">车道号</label>
+          <div
+            class="radio-chip-group"
+            id="laneGroup"></div>
+        </div>
+
+        <!-- 贴边 -->
+        <div class="form-group">
+          <label class="form-group__label">贴边</label>
+          <div
+            class="radio-chip-group"
+            id="sideGroup"></div>
+        </div>
+
+        <!-- 托盘类型 -->
+        <div class="form-group">
+          <label class="form-group__label">托盘类型</label>
+          <div
+            class="radio-chip-group"
+            id="palletGroup"></div>
+        </div>
+
+        <!-- 箱号（动态，1~2个） -->
+        <div class="form-group">
+          <label class="form-group__label">箱号</label>
+          <div id="containerGroup">
+            <div class="container-item">
+              <div class="container-row">
+                <input
+                  class="weui-input container-input"
+                  type="text"
+                  inputmode="numeric"
+                  placeholder="请输入箱号" />
+                <span
+                  class="btn-icon btn-add-container"
+                  title="添加箱号">
+                  +
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 添加按钮 -->
+      <div class="btn-area">
+        <a
+          href="javascript:;"
+          class="weui-btn weui-btn_primary"
+          id="btnAdd">
+          添加记录
+        </a>
+      </div>
+
+      <!-- 记录列表 -->
+      <div class="section-title">
+        <span>📋 记录列表</span>
+        <span
+          class="count"
+          id="recordCount">
+          共 0 条
+        </span>
+      </div>
+      <div
+        class="record-list"
+        id="recordList">
+        <div class="empty-state">
+          <div class="empty-state__icon">📭</div>
+          <div class="empty-state__text">暂无记录</div>
+        </div>
+      </div>
+
+      <!-- 底部操作（fixed 悬浮） -->
+      <div class="page__footer">
+        <div class="footer-actions">
+          <a
+            href="javascript:;"
+            class="weui-btn weui-btn_default"
+            id="btnExport">
+            导出 JSON
+          </a>
+          <a
+            href="javascript:;"
+            class="weui-btn weui-btn_warn"
+            id="btnDeleteHistory">
+            删除历史
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 导出日期选择弹窗 -->
+    <div
+      id="exportDateModal"
+      style="display: none">
+      <div class="weui-mask"></div>
+      <div class="export-date-dialog">
+        <div class="export-date-dialog__hd">选择导出日期</div>
+        <div
+          class="export-date-dialog__bd"
+          id="exportDateList"></div>
+        <div class="export-date-dialog__ft">
+          <a
+            href="javascript:;"
+            class="weui-btn weui-btn_default"
+            id="btnCancelExport">
+            取消
+          </a>
+          <a
+            href="javascript:;"
+            class="weui-btn weui-btn_primary"
+            id="btnConfirmExport"
+            style="display: none">
+            导出 (0)
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div
+      id="toast"
+      style="display: none">
+      <div class="weui-mask_transparent"></div>
+      <div class="weui-toast">
+        <p
+          class="weui-toast__content"
+          id="toastMsg"></p>
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <!-- WeUI JS -->
+    <script src="https://cdn.jsdelivr.net/npm/weui.js@1.2.20/dist/weui.min.js"></script>
+    <!-- 应用逻辑 -->
+    <script src="app.js"></script>
+  </body>
+</html>
