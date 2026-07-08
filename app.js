@@ -232,10 +232,6 @@
 
     // 验证
     var hasError = false;
-    if (!palletType) {
-      markError($palletGroup);
-      hasError = true;
-    }
     if (containerNumbers.length === 0) {
       markContainerError($containerGroup);
       hasError = true;
