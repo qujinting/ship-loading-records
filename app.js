@@ -1,21 +1,10 @@
 (function ($) {
   // ==================== 配置区 ====================
-  var DECK_OPTIONS = [
-    { label: '一甲', value: '1' },
-    { label: '三甲', value: '3' },
-    { label: '五甲', value: '5' },
-  ];
-  // 车道号选项列表，在此数组中加入选项（格式：字符串 或 { label, value }）
-  var LANE_OPTIONS = ['车道1'];
   // 托盘类型选项列表，在此数组中加入选项
   var PALLET_TYPES = [
     { label: '20尺', value: '20' },
     { label: '40尺', value: '40' },
-    { label: '45尺', value: '45' },
-  ];
-  var SIDE_OPTIONS = [
-    { label: '船尾', value: 'stern' },
-    { label: '船头', value: 'bow' },
+    { label: '鹅盘', value: '鹅盘' },
   ];
 
   // ==================== 常量 ====================
@@ -24,10 +13,7 @@
   var PAGE_SIZE = 20;
 
   // ==================== 缓存 DOM ====================
-  var $deckGroup = $('#deckGroup');
-  var $laneGroup = $('#laneGroup');
   var $palletGroup = $('#palletGroup');
-  var $sideGroup = $('#sideGroup');
   var $containerGroup = $('#containerGroup');
   var $btnAdd = $('#btnAdd');
   var $recordList = $('#recordList');
@@ -41,27 +27,6 @@
   var records = [];
   var displayLimit = PAGE_SIZE;
   var expanded = false;
-
-  // 构建值→显示文本的字典映射
-  var labelMap = {};
-  function buildLabelMap() {
-    labelMap = {};
-    $.each(DECK_OPTIONS, function (_, opt) {
-      if (typeof opt === 'object') labelMap[opt.value] = opt.label;
-    });
-    $.each(LANE_OPTIONS, function (_, opt) {
-      if (typeof opt === 'object') labelMap[opt.value] = opt.label;
-      else labelMap[opt] = opt;
-    });
-    $.each(PALLET_TYPES, function (_, opt) {
-      if (typeof opt === 'object') labelMap[opt.value] = opt.label;
-      else labelMap[opt] = opt;
-    });
-    $.each(SIDE_OPTIONS, function (_, opt) {
-      if (typeof opt === 'object') labelMap[opt.value] = opt.label;
-      else labelMap[opt] = opt;
-    });
-  }
 
   // ==================== 初始化 ====================
   function init() {
@@ -89,18 +54,8 @@
   }
 
   function renderSelectOptions() {
-    // 渲染甲板号 radio chips
-    renderRadioChips($deckGroup, 'deck', DECK_OPTIONS);
-
-    // 渲染车道号 radio chips
-    renderRadioChips($laneGroup, 'lane', LANE_OPTIONS);
-
     // 渲染托盘类型 radio chips
     renderRadioChips($palletGroup, 'pallet', PALLET_TYPES);
-
-    // 渲染排序方向 radio chips
-    renderRadioChips($sideGroup, 'side', SIDE_OPTIONS);
-    buildLabelMap();
   }
 
   function renderRadioChips($group, name, options) {
@@ -269,10 +224,7 @@
 
   // ==================== 添加记录 ====================
   function handleAddRecord() {
-    var deck = $deckGroup.find('input[type="radio"]:checked').val() || '';
-    var lane = $laneGroup.find('input[type="radio"]:checked').val() || '';
     var palletType = $palletGroup.find('input[type="radio"]:checked').val() || '';
-    var side = $sideGroup.find('input[type="radio"]:checked').val() || '';
     var containerNumbers = getContainerValues();
 
     // 清除所有错误态
@@ -280,20 +232,8 @@
 
     // 验证
     var hasError = false;
-    if (!deck) {
-      markError($deckGroup);
-      hasError = true;
-    }
-    if (!lane) {
-      markError($laneGroup);
-      hasError = true;
-    }
     if (!palletType) {
       markError($palletGroup);
-      hasError = true;
-    }
-    if (!side) {
-      markError($sideGroup);
       hasError = true;
     }
     if (containerNumbers.length === 0) {
@@ -309,10 +249,7 @@
     // 构建记录
     var record = {
       id: String(Date.now()),
-      deck: deck,
-      lane: lane,
       palletType: palletType,
-      side: side,
       containerNumbers: containerNumbers,
       recordTime: formatTime(new Date()),
     };
@@ -592,16 +529,8 @@
     var $card = $('<div>').addClass('record-card').attr('data-id', r.id);
     var $body = $('<div>').addClass('record-card__body');
 
-    // 第一行：甲板·车道·托盘·朝向
-    var parts = [
-      resolveLabel(r.deck),
-      resolveLabel(r.lane),
-      resolveLabel(r.side || ''),
-      resolveLabel(r.palletType),
-    ];
-    $body.append(
-      $('<div>').addClass('record-card__row record-card__row--tags').text(parts.join(' · ')),
-    );
+    // 第一行：托盘类型
+    $body.append($('<div>').addClass('record-card__row record-card__row--tags').text(r.palletType));
 
     // 第二行：箱号标签
     var $valueSpan = $('<span>').addClass('record-card__value');
@@ -692,10 +621,6 @@
     $recordCount.text('共 ' + records.length + ' 条');
   }
 
-  function resolveLabel(value) {
-    return labelMap[value] || value;
-  }
-
   function showEmptyState() {
     $recordList.html(
       '<div class="empty-state">' +
@@ -707,10 +632,7 @@
 
   // ==================== 重置表单 ====================
   function resetForm() {
-    $deckGroup.find('input[type="radio"]').prop('checked', false);
-    $laneGroup.find('input[type="radio"]').prop('checked', false);
     $palletGroup.find('input[type="radio"]').prop('checked', false);
-    $sideGroup.find('input[type="radio"]').prop('checked', false);
 
     // 重置箱号输入框为1个
     var $items = $containerGroup.find('.container-item');
